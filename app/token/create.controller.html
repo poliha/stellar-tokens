@@ -1,0 +1,101 @@
+<div>
+  <div class="page-title">
+    <h2><span class="fa fa-rocket"></span> Create an Asset</h2>
+  </div>
+	<div class="row" ng-controller="createController" ng-init="init()">
+    <div ng-if="statusMsg" class="alert ng-class:statusMsg.type" role="alert">
+      <button type="button" ng-click="closeAlert()" class="close" ><span>×</span><span class="sr-only">Close</span></button>
+      <li ng-repeat="x in statusMsg.content track by $index">
+      {{x}}
+      </li>
+    </div>
+    <div ng-if="processing">
+      <img src="assets/img/load.gif" width="50px"> <span>Processing</span>
+    </div>
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+
+			<div class="panel panel-colorful">
+				<div class="panel-body">
+					<p class="text-info"> Issuing and Distribution accounts must be active and have a balance of at least 40XLM</p>
+					<form  ng-submit="createToken()">
+          <div class="form-group">
+						<label>Issuer Secret Key</label>
+						<input type="text" class="form-control" name="issuerSecret" ng-model="tokenData.issuerSecret" placeholder="Stellar Account Secret Key for Issuer" required>
+					</div>
+          <div class="form-group">
+            <label>Distributor Secret Key</label>
+            <input type="text" class="form-control" name="distSecret" ng-model="tokenData.distSecret" placeholder="Stellar Account Secret Key for Distributor" required>
+          </div>
+          <div class="form-group">
+            <label>Asset Name</label>
+            <input type="text" class="form-control" name="assetName" ng-model="tokenData.assetName" placeholder="Asset Name" required>
+          </div>
+          <div class="form-group">
+            <label>Asset Code</label>
+            <input type="text" class="form-control" name="assetCode" ng-model="tokenData.assetCode" placeholder="Asset Code" maxlength="12" required>
+          </div>
+					<div class="form-group">
+						<label>Amount</label>
+						<input type="number" class="form-control" name="amount" min="0" step="0.0000001" ng-model="tokenData.amount" placeholder="Total number of tokens" required>
+					</div>
+
+            <div class="form-group">
+              <label>Require Authorisation</label>
+                <label class="switch switch-small">
+                    <input type="checkbox" ng-model="tokenData.requireAuth" checked="true" ng-value="1">
+                    <span></span>
+                </label>
+                <span class="help-block text-info">Requires the issuing account to give other accounts permission before they can hold the issuing account’s credit.</span>
+            </div>
+
+            <div class="form-group">
+              <label>Authorisation Revocable</label>
+                <label class="switch switch-small">
+                    <input type="checkbox" ng-model="tokenData.revokeAuth" checked="true" ng-value="1">
+                    <span></span>
+                </label>
+                <span class="help-block text-info">Allows the issuing account to revoke its credit held by other accounts.</span>
+            </div>
+
+
+           <div class="form-group">
+              <label>Distribute on Stellar Decentralised Exchange</label>
+                <label class="switch switch-small">
+                    <input type="checkbox" ng-model="tokenData.distType" checked="true" ng-value="1">
+                    <span></span>
+                </label>
+            </div>
+
+            <div class="form-group" ng-show="isDEX(tokenData.distType)">
+              <label>Amount to sell</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><span>#</span></span>
+                  <input class="form-control" type="number" name="distAmount" ng-model="tokenData.distAmount" step="0.0000001" />
+
+                </div>
+                <span class="help-block text-info">Amount of assets to distribute</span>
+            </div>
+
+            <div class="form-group" ng-show="isDEX(tokenData.distType)">
+              <label>Price per Asset</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><span class="fa fa-money"></span></span>
+                  <input class="form-control" type="text" name="distPrice" ng-model="tokenData.distPrice" step="0.0000001"/>
+
+                </div>
+                <span class="help-block text-info">Price of {{tokenData.assetCode || 'Asset' }} to XLM:  
+                  1{{tokenData.assetCode || 'Asset' }} = {{tokenData.distPrice || '1.00' }}XLM</span>
+            </div>
+
+
+            <button class="btn btn-success pull-right">Create</button>
+          </form>
+				</div>
+				<div class="panel-footer">
+					
+				</div>
+			</div>
+
+		</div>
+  </div>
+</div>

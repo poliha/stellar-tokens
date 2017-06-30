@@ -1,0 +1,32 @@
+{
+  "name": "Stellar Assets Directory",
+  "version": "1.0.0",
+  "description": "Creat and list Assets/Tokens on the Stellar Protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "stellar",
+    "lumens",
+    "xlm",
+    "angularjs",
+    "javascript"
+  ],
+  "author": "@peteroliha",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-loading-bar": "^0.9.0",
+    "angular-ui-router": "^1.0.3",
+    "stellar-sdk": "^0.7.3"
+  }
+}
