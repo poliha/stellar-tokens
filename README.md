@@ -4,3 +4,5 @@ Inspired by this blog post: [Tokens on Stellar](https://www.stellar.org/blog/tok
 
 It merges most of the steps mentioned in the post into a simple form.
 
+# Usage
+Test it out here [https://poliha.github.io/stellar-tokens/](https://poliha.github.io/stellar-tokens/)
