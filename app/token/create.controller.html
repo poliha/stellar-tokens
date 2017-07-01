@@ -2,7 +2,7 @@
   <div class="page-title">
     <h2><span class="fa fa-rocket"></span> Create an Asset</h2>
   </div>
-	<div class="row" ng-controller="createController" ng-init="init()">
+  <div class="row" ng-controller="createController" ng-init="init()">
     <div ng-if="statusMsg" class="alert ng-class:statusMsg.type" role="alert">
       <button type="button" ng-click="closeAlert()" class="close" ><span>×</span><span class="sr-only">Close</span></button>
       <li ng-repeat="x in statusMsg.content track by $index">
@@ -12,16 +12,27 @@
     <div ng-if="processing">
       <img src="assets/img/load.gif" width="50px"> <span>Processing</span>
     </div>
-		<div class="col-md-8 col-md-offset-2 col-xs-12">
+    <div class="col-md-8 col-md-offset-2 col-xs-12">
 
-			<div class="panel panel-colorful">
-				<div class="panel-body">
-					<p class="text-info"> Issuing and Distribution accounts must be active and have a balance of at least 40XLM</p>
-					<form  ng-submit="createToken()">
+      <div class="panel panel-colorful">
+        <div class="panel-body">
+          <p class="text-info"> Issuing and Distribution accounts must be active and have a balance of at least 40XLM</p>
+          <br>
+          <form  ng-submit="createToken()">
+
           <div class="form-group">
-						<label>Issuer Secret Key</label>
-						<input type="text" class="form-control" name="issuerSecret" ng-model="tokenData.issuerSecret" placeholder="Stellar Account Secret Key for Issuer" required>
-					</div>
+            <label>Network</label>
+            <br>
+              <input type="radio" name="networkType" ng-model="tokenData.networkType" ng-checked="true" ng-value="1">Test
+              <input type="radio" name="networkType" ng-model="tokenData.networkType" ng-value="2">
+              Public
+
+
+          </div>
+          <div class="form-group">
+            <label>Issuer Secret Key</label>
+            <input type="text" class="form-control" name="issuerSecret" ng-model="tokenData.issuerSecret" placeholder="Stellar Account Secret Key for Issuer" required>
+          </div>
           <div class="form-group">
             <label>Distributor Secret Key</label>
             <input type="text" class="form-control" name="distSecret" ng-model="tokenData.distSecret" placeholder="Stellar Account Secret Key for Distributor" required>
@@ -34,10 +45,10 @@
             <label>Asset Code</label>
             <input type="text" class="form-control" name="assetCode" ng-model="tokenData.assetCode" placeholder="Asset Code" maxlength="12" required>
           </div>
-					<div class="form-group">
-						<label>Amount</label>
-						<input type="number" class="form-control" name="amount" min="0" step="0.0000001" ng-model="tokenData.amount" placeholder="Total number of tokens" required>
-					</div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" class="form-control" name="amount" min="0" step="0.0000001" ng-model="tokenData.amount" placeholder="Total number of tokens" required>
+          </div>
 
             <div class="form-group">
               <label>Require Authorisation</label>
@@ -90,12 +101,12 @@
 
             <button class="btn btn-success pull-right">Create</button>
           </form>
-				</div>
-				<div class="panel-footer">
-					
-				</div>
-			</div>
+        </div>
+        <div class="panel-footer">
+          
+        </div>
+      </div>
 
-		</div>
+    </div>
   </div>
 </div>
