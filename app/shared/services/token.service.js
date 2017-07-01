@@ -46,13 +46,23 @@ token.factory('Token', function($http, $rootScope) {
 						messages.push("Invalid Asset Code");
 					}
 
-					if (!tokenData.amount || tokenData.amount <= 0 || Number.isNaN(tokenData.aount)) {
+					if (!tokenData.amount || tokenData.amount <= 0 || Number.isNaN(tokenData.amount)) {
 						messages.push("Invalid Amount");
 					}
 
 					if (tokenData.issuerSecret == tokenData.distSecret) {
 						messages.push("Issuer and Distributor can not be the same");
 					}
+
+          if (tokenData.distType) {
+            if (!tokenData.distAmount || tokenData.distAmount <= 0 || Number.isNaN(tokenData.distAmount)) {
+              messages.push("Invalid Distribution Amount");
+            }
+            if (!tokenData.distPrice || tokenData.distPrice <= 0 || Number.isNaN(tokenData.distPrice)) {
+              messages.push("Invalid Distribution Price");
+            }
+          }
+
 
 					if (messages.length > 0) {
 						return Utility.returnError(messages);
