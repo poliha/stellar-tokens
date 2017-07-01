@@ -102,11 +102,11 @@ token.factory('Token', function($http, $rootScope) {
               var operationObj = {};
 
               if (tokenData.requireAuth) {
-                setFlags += 1;
+                setFlags += StellarSdk.AuthRequiredFlag;
               }
 
               if (tokenData.revokeAuth) {
-                setFlags += 2;
+                setFlags += StellarSdk.AuthRevocableFlag;
               }
               // set flag options
               if (setFlags > 0) {
