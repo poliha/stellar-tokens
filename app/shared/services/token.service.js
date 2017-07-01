@@ -68,7 +68,18 @@ token.factory('Token', function($http, $rootScope) {
 						return Utility.returnError(messages);
 					}
 
-					console.log("asset", asset);
+          // override default server
+          if (tokenData.networkType) {
+            if (tokenData.networkType == 1) {
+              StellarSdk.Network.useTestNetwork();
+              server = new StellarSdk.Server(Config.Stellar.testNetwork);
+            }
+
+            if (tokenData.networkType == 2) {
+              StellarSdk.Network.usePublicNetwork();
+              server = new StellarSdk.Server(Config.Stellar.liveNetwork);
+            }
+          }
 
           // load issuer account
           return server.loadAccount(issuerAcct.publicKey())
