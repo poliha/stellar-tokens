@@ -102,11 +102,11 @@ token.factory('Token', function($http, $rootScope) {
               var operationObj = {};
 
               if (tokenData.requireAuth) {
-                setFlags += 1;
+                setFlags += StellarSdk.AuthRequiredFlag;
               }
 
               if (tokenData.revokeAuth) {
-                setFlags += 2;
+                setFlags += StellarSdk.AuthRevocableFlag;
               }
               // set flag options
               if (setFlags > 0) {
@@ -138,6 +138,17 @@ token.factory('Token', function($http, $rootScope) {
               operationObj.amount = tokenData.amount.toString();
               operationObj.source = issuerAcct.publicKey();
               transaction.addOperation(StellarSdk.Operation.payment(operationObj));
+
+              // lockAccount
+              if (tokenData.lockAccount) {
+                operationObj = {};
+                operationObj.masterWeight = 1;
+                operationObj.lowThreshold = 1;
+                operationObj.medThreshold = 2;
+                operationObj.highThreshold = 3;
+                operationObj.source = issuerAcct.publicKey();
+                transaction.addOperation(StellarSdk.Operation.setOptions(operationObj));
+              }
 
               // place offer on stellar DEX
               if (tokenData.distType) {

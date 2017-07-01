@@ -64,6 +64,16 @@
                 <span class="help-block text-info">Allows the issuing account to revoke its credit held by other accounts.</span>
             </div>
 
+            <div class="form-group">
+              <label>Stop token creation</label>
+                <label class="switch switch-small">
+                    <input type="checkbox" ng-model="tokenData.lockAccount" checked="true" ng-value="1">
+                    <span></span>
+                </label>
+                <span class="help-block text-info">No further tokens can be created after now.</span>
+                <span class="text-danger" ng-show="isDEX(tokenData.lockAccount)">This will also prevent the issuing account from sending payments of any kind.(Custom tokens or XLM)</span>
+            </div>
+
 
            <div class="form-group">
               <label>Distribute on Stellar Decentralised Exchange</label>
