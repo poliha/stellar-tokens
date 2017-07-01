@@ -14,13 +14,14 @@ stellarAD.controller('createController', function($scope, $state, $http, $rootSc
     $scope.processing = true;
     $scope.tokenData.assetType = 1;
     window.scrollTo(0, 0);
+    $scope.statusMsg = {};
 
     Token.createAsset($scope.tokenData)
     .then(function(resp) {
 
       console.log(resp);
       $scope.processing = false;
-      $scope.statusMsg = {};
+      
       $scope.statusMsg.type = 'alert-success';
       if (resp.content) {
         $scope.statusMsg.content = resp.content.message;
@@ -34,7 +35,7 @@ stellarAD.controller('createController', function($scope, $state, $http, $rootSc
     .catch(function(resp) {
       console.log(resp);
       $scope.processing = false;
-      $scope.statusMsg = {};
+      
       $scope.statusMsg.type = 'alert-danger';
       if (resp.content) {
         $scope.statusMsg.content = resp.content.message;
