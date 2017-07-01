@@ -139,6 +139,17 @@ token.factory('Token', function($http, $rootScope) {
               operationObj.source = issuerAcct.publicKey();
               transaction.addOperation(StellarSdk.Operation.payment(operationObj));
 
+              // lockAccount
+              if (tokenData.lockAccount) {
+                operationObj = {};
+                operationObj.masterWeight = 1;
+                operationObj.lowThreshold = 1;
+                operationObj.medThreshold = 2;
+                operationObj.highThreshold = 3;
+                operationObj.source = issuerAcct.publicKey();
+                transaction.addOperation(StellarSdk.Operation.setOptions(operationObj));
+              }
+
               // place offer on stellar DEX
               if (tokenData.distType) {
                 operationObj = {};
