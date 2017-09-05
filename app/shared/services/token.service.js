@@ -122,7 +122,7 @@ token.factory('Token', function($http, $rootScope) {
               transaction.addOperation(StellarSdk.Operation.changeTrust(operationObj));
 
               // allow trust
-              if (setFlags > 0) {
+              if (tokenData.requireAuth) {
                 operationObj = {};
                 operationObj.trustor = distAcct.publicKey();
                 operationObj.assetCode = tokenData.assetCode;
